@@ -41,34 +41,51 @@ Friday and sell zero. Distribution is the bottleneck. Pick a venue with native
 traffic or an audience you can already reach for free. $50 buys no meaningful
 paid acquisition — assume CAC must be zero.
 
-## 2. The actual asset (this is not the $50)
+## 2. The asset — and one thing it must not be
 
-The Ahrefs workspace is on Standard with **800,000 units/month, of which 23,399
-are used — 97% idle**. That is a few hundred dollars/month of already-paid-for
-proprietary data access sitting unused, plus B2B marketing domain expertise and
-free hosting on Netlify/Wix.
+**Not the Ahrefs workspace.** That account belongs to an employer. Its idle
+quota is idle *employer* capacity, not a free resource, and "97% unused" is an
+argument about volume when the problem is purpose. Using it to inform work
+judgment is ordinary professional use. Using its data as an input to something
+sold for personal revenue is a different category, and a single $29 report sits
+in that category exactly as much as a thousand would. There is no light-touch
+version of that line — so this project does not cross it at all.
 
-That is the unfair advantage worth compounding. The $50 is rounding error next
-to it.
+Two reasons, and the second is the one that should actually decide it:
 
-**Recommended vehicle:** an agent-produced diagnostic deliverable for B2B
-marketers, built on Ahrefs data plus judgment, sold to an audience reachable for
-free. Cost to produce: ~$1–3 of tokens. Price: $29–99. The margin holds because
-the buyer cannot self-serve the input data without a $250+/mo subscription.
+1. The downside is asymmetric to the point of absurdity. Conflict-of-interest
+   and IP-assignment clauses are standard; the worst case is a job, against an
+   upside of maybe $150.
+2. **It is a bad foundation regardless of ethics.** The asset is revocable and
+   not yours. It disappears when you change roles, when someone audits the API
+   key, or when procurement swaps vendors. A business whose only edge is an
+   input you cannot control is not a business — it is a countdown.
 
-**Legal constraint, check before any sale:** Ahrefs' API terms generally prohibit
-reselling or redistributing raw data. Derived analysis and recommendations are
-normally fine; a dump of their metrics is not. Read the license and stay on the
-analysis side of that line. If the license forbids it outright, this vehicle dies
-and the fallback below applies.
+**What is actually yours, portable, and not revocable:** B2B marketing and
+attribution expertise, judgment about what marketers will pay to know, a
+reachable professional network, and free-tier hosting.
 
-**Fallbacks, in order:** (a) the same deliverable built on free data sources at
-lower margin; (b) a narrow paid tool on free-tier hosting; (c) productized
-freelance delivery where you sell and the agent produces.
+**Cycle-1 vehicle — expertise plus client-supplied data.** The buyer grants
+read access to their *own* Search Console / analytics; you return analysis and
+recommendations. This is clean on every axis: no employer resources, no data
+licensing exposure (it is the client's data, shared by the client), and no
+up-front tooling cost. It is consulting, productized — the agent does the
+analysis and drafting, you hold the relationship.
 
-**Explicitly excluded:** mass-generated content, affiliate spam, review farming,
-anything that needs volume to work. These get banned, and the ban arrives after
-you have paid the token cost, not before.
+**The best use of the $50:** once cycle 1 validates that someone pays, spend it
+on *your own* pay-as-you-go data access — DataForSEO, SerpApi and similar bill
+per query at cents scale, so $50 covers a meaningful run of reports. Verify
+current pricing and licensing terms before committing. This is the step that
+matters strategically: it converts a borrowed edge into an owned one, and it is
+paid for by revenue the idea already proved it can generate.
+
+**Free inputs that need no licence:** Google Search Console (own or granted
+properties), Google Keyword Planner (free with an Ads account, bucketed ranges
+without spend), Bing Webmaster Tools, and public forum/community demand mining.
+
+**Explicitly excluded:** employer accounts, credentials, or data in any form;
+mass-generated content; affiliate spam; review farming. The last three get
+banned, and the ban lands after you have paid the token cost, not before.
 
 ## 3. Cost discipline
 
@@ -108,6 +125,9 @@ working, not the project failing. Cycle 1 costs $10 to find out.
 ## 5. What "success" means
 
 If this returns $200 on ~$50 of credits, the money is not the point. The durable
-output is a validated, repeatable pipeline for turning idle data-tool quota into
-sellable deliverables — which is worth considerably more than $150, and is the
-thing to actually optimize for.
+output is a validated, repeatable pipeline for turning your own expertise into
+sellable deliverables, running on inputs you own — worth considerably more than
+$150, and the thing to actually optimize for.
+
+The test for any vehicle proposed later: **if it stops working the day you
+change jobs, it was never an asset.**
