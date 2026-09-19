@@ -1,2 +1,4 @@
 ledger.json
 __pycache__/
+out/
+shot-*.png

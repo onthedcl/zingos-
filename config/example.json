@@ -1,0 +1,22 @@
+{
+  "brand": "Northbeam",
+  "aliases": ["Northbeam.io"],
+  "category": "B2B marketing attribution software",
+  "runs": 5,
+  "n_prompts": 20,
+  "competitors": [
+    {"name": "HockeyStack"},
+    {"name": "Dreamdata"},
+    {"name": "Triple Whale", "aliases": ["TripleWhale"]},
+    {"name": "Rockerbox"},
+    {"name": "Measured"}
+  ],
+  "prompts": [
+    "best marketing attribution tools for B2B saas",
+    "how do I measure which channels actually drive pipeline",
+    "multi touch attribution software comparison",
+    "why doesn't my ad platform data match my CRM",
+    "tools to track marketing ROI across long sales cycles",
+    "how to attribute revenue to marketing in a long b2b sales cycle"
+  ]
+}
