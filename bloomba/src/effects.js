@@ -36,12 +36,21 @@ function getAudio() {
 }
 
 // Browsers only allow sound after the child has tapped something, so call this
-// from a tap handler (the Start button). On iPhone, the "playback" session
-// makes the game audible even when the ring/silent switch is on silent.
+// from every tap handler. On iPhone, the "playback" session makes the game
+// audible even when the ring/silent switch is on silent.
 export function unlockAudio() {
   try {
     if (navigator.audioSession) navigator.audioSession.type = 'playback';
   } catch {}
+  // iPhones can leave the audio frozen ("interrupted" or "suspended") after
+  // switching apps, a call or the screen dimming, and resume() doesn't always
+  // bring it back. A tap is allowed to start fresh audio, so swap in a new
+  // context. Decoded clips are kept: they work with any context.
+  if (audioContext && audioContext.state !== 'running') {
+    const stale = audioContext;
+    audioContext = null;
+    stale.close?.().catch(() => {});
+  }
   const ctx = getAudio();
   if (!ctx) return;
   // A one-sample silent buffer started inside the tap unlocks iOS Safari.
@@ -49,6 +58,16 @@ export function unlockAudio() {
   source.buffer = ctx.createBuffer(1, 1, 22050);
   source.connect(ctx.destination);
   source.start(0);
+}
+
+// Coming back to the page: try to wake the audio straight away. If the phone
+// refuses, the next tap starts fresh audio (see unlockAudio).
+if (typeof document !== 'undefined') {
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && audioContext && audioContext.state !== 'running') {
+      audioContext.resume().catch(() => {});
+    }
+  });
 }
 
 function tone(ctx, frequency, start, length, volume = 0.15) {
@@ -114,6 +133,9 @@ function playBuffer(ctx, buffer) {
     source.buffer = buffer;
     source.connect(ctx.destination);
     source.onended = resolve;
+    // If the audio freezes mid-clip, onended never fires; don't let the
+    // rest of the line wait forever.
+    setTimeout(resolve, buffer.duration * 1000 + 500);
     currentSource = source;
     source.start();
   });

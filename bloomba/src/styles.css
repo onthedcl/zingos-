@@ -178,6 +178,15 @@ button {
   color: #ff6b9d;
 }
 
+/* A thin dark outline keeps light colours like yellow readable on white. */
+.prompt strong.color-word {
+  text-shadow:
+    -1px -1px 0 rgba(0, 0, 0, 0.35),
+    1px -1px 0 rgba(0, 0, 0, 0.35),
+    -1px 1px 0 rgba(0, 0, 0, 0.35),
+    1px 1px 0 rgba(0, 0, 0, 0.35);
+}
+
 .prompt-speaker {
   font-size: 26px;
 }
