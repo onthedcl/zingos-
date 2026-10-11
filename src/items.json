@@ -51,18 +51,18 @@
   ],
   "animals": [
     {
-      "id": "doggy",
+      "id": "dog",
       "emoji": "🐶",
-      "label": "Doggy",
+      "label": "Dog",
       "color": "#FFB84C",
-      "spoken": "the Doggy"
+      "spoken": "the Dog"
     },
     {
-      "id": "kitty",
+      "id": "cat",
       "emoji": "🐱",
-      "label": "Kitty",
+      "label": "Cat",
       "color": "#FF6B9D",
-      "spoken": "the Kitty"
+      "spoken": "the Cat"
     },
     {
       "id": "cow",
@@ -72,18 +72,18 @@
       "spoken": "the Cow"
     },
     {
-      "id": "piggy",
+      "id": "pig",
       "emoji": "🐷",
-      "label": "Piggy",
+      "label": "Pig",
       "color": "#FF8FAB",
-      "spoken": "the Piggy"
+      "spoken": "the Pig"
     },
     {
-      "id": "froggy",
+      "id": "frog",
       "emoji": "🐸",
-      "label": "Froggy",
+      "label": "Frog",
       "color": "#6BCB77",
-      "spoken": "the Froggy"
+      "spoken": "the Frog"
     },
     {
       "id": "lion",
