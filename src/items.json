@@ -267,6 +267,16 @@
       }
     },
     {
+      "id": "bus",
+      "emoji": "🚌",
+      "label": "Bus",
+      "color": "#F4C430",
+      "spoken": "the Bus",
+      "photo": {
+        "file": "bus.webp"
+      }
+    },
+    {
       "id": "truck",
       "emoji": "🚛",
       "label": "Garbage Truck",
