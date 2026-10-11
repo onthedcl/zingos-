@@ -1,51 +1,10 @@
-// Item pools, grouped by category. Each round picks one category and
-// shows several items from it; the child is asked to find one by name.
-export const CATEGORIES = {
-  colors: [
-    { emoji: '🔴', label: 'Red', color: '#FF6B6B' },
-    { emoji: '🔵', label: 'Blue', color: '#4D96FF' },
-    { emoji: '🟢', label: 'Green', color: '#6BCB77' },
-    { emoji: '🟡', label: 'Yellow', color: '#F4C430' },
-    { emoji: '🟣', label: 'Purple', color: '#C67BFF' },
-    { emoji: '🟠', label: 'Orange', color: '#FF8C42' },
-  ],
-  animals: [
-    { emoji: '🐶', label: 'Doggy', color: '#FFB84C' },
-    { emoji: '🐱', label: 'Kitty', color: '#FF6B9D' },
-    { emoji: '🐮', label: 'Cow', color: '#95E1D3' },
-    { emoji: '🐷', label: 'Piggy', color: '#FF8FAB' },
-    { emoji: '🐸', label: 'Froggy', color: '#6BCB77' },
-    { emoji: '🦁', label: 'Lion', color: '#F4A259' },
-  ],
-  shapes: [
-    { emoji: '⭐', label: 'Star', color: '#F4C430' },
-    { emoji: '❤️', label: 'Heart', color: '#FF6B9D' },
-    { emoji: '🌙', label: 'Moon', color: '#7B8CDE' },
-    { emoji: '☀️', label: 'Sun', color: '#FF8C42' },
-    { emoji: '🔺', label: 'Triangle', color: '#4ECDC4' },
-  ],
-  food: [
-    { emoji: '🍎', label: 'Apple', color: '#FF6B6B' },
-    { emoji: '🍌', label: 'Banana', color: '#F4C430' },
-    { emoji: '🍓', label: 'Strawberry', color: '#FF6B9D' },
-    { emoji: '🥕', label: 'Carrot', color: '#FF8C42' },
-    { emoji: '🍪', label: 'Cookie', color: '#C08552' },
-  ],
-  critters: [
-    { emoji: '🦋', label: 'Butterfly', color: '#FF8C42' },
-    { emoji: '🐢', label: 'Turtle', color: '#4ECDC4' },
-    { emoji: '🐝', label: 'Bee', color: '#F4C430' },
-    { emoji: '🐞', label: 'Ladybug', color: '#FF6B6B' },
-    { emoji: '🐌', label: 'Snail', color: '#C67BFF' },
-  ],
-  vehicles: [
-    { emoji: '🚗', label: 'Car', color: '#FF6B6B' },
-    { emoji: '🚌', label: 'Bus', color: '#F4C430' },
-    { emoji: '✈️', label: 'Airplane', color: '#4D96FF' },
-    { emoji: '🚂', label: 'Train', color: '#6BCB77' },
-    { emoji: '⛵', label: 'Boat', color: '#4ECDC4' },
-  ],
-};
+// Item pools, grouped by category, live in items.json so the voice script
+// (scripts/make_voice.py) can read the same list. Each round picks one
+// category and shows several items from it; the child finds one by name.
+import CATEGORIES from './items.json';
+import PHRASES from './phrases.json';
+
+export { CATEGORIES };
 
 // Difficulty mixes two dials: more choices on screen, and new categories unlocked.
 export const LEVELS = [
@@ -78,17 +37,21 @@ export function makeRound(difficulty, previousTarget) {
   const category = pick(level.categories);
   const pool = CATEGORIES[category];
   const choices = shuffle(pool).slice(0, level.choices);
-  const candidates = choices.filter((c) => c.label !== previousTarget?.label);
+  const candidates = choices.filter((c) => c.id !== previousTarget?.id);
   const target = pick(candidates.length ? candidates : choices);
   return { id: Math.random(), choices, target };
 }
 
-const PRAISE = ['Great job', 'You did it', 'Wonderful', 'Yay', 'Super', 'Amazing'];
-
-export function praiseFor(name) {
-  return `${pick(PRAISE)}, ${name}!`;
-}
-
-export function promptFor(target) {
-  return `Can you find the ${target.label}?`;
-}
+// Every spoken line has a recorded clip in public/voice, made from these same
+// texts by scripts/make_voice.py. A line is { clip, text }: the text is the
+// fallback if the clip can't play.
+export const lines = {
+  welcome: { clip: 'welcome', text: PHRASES.welcome },
+  levelup: { clip: 'levelup', text: PHRASES.levelup },
+  find: (item) => ({ clip: `find-${item.id}`, text: `Can you find ${item.spoken}?` }),
+  thatsThe: (item) => ({ clip: `thats-${item.id}`, text: `That's ${item.spoken}!` }),
+  praise: () => {
+    const index = Math.floor(Math.random() * PHRASES.praise.length);
+    return { clip: `praise-${index}`, text: PHRASES.praise[index] };
+  },
+};

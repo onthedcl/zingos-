@@ -1,12 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {
-  makeRound,
-  promptFor,
-  praiseFor,
-  MAX_DIFFICULTY,
-  FLOWERS_PER_LEVEL,
-} from './game.js';
-import { triggerConfetti, playSound, speak } from './effects.js';
+import { makeRound, lines, MAX_DIFFICULTY, FLOWERS_PER_LEVEL } from './game.js';
+import { triggerConfetti, playSound, unlockAudio, say, preloadLines, stopSpeaking } from './effects.js';
 
 const STORAGE_KEY = 'bloomba-state';
 
@@ -36,7 +30,9 @@ export default function Bloomba() {
 
   const handleStartGame = (e) => {
     e.preventDefault();
-    if (childName.trim()) setGameStarted(true);
+    if (!childName.trim()) return;
+    unlockAudio();
+    setGameStarted(true);
   };
 
   const handleReset = () => {
@@ -92,27 +88,41 @@ export default function Bloomba() {
 
 function GameScreen({ childName, flowers, setFlowers, difficulty, setDifficulty, onExit }) {
   const [round, setRound] = useState(() => makeRound(difficulty));
-  const [wrongLabel, setWrongLabel] = useState(null);
+  const [wrongId, setWrongId] = useState(null);
   const [celebrating, setCelebrating] = useState(false);
   const timers = useRef([]);
+  const welcomed = useRef(false);
 
   const later = (fn, ms) => timers.current.push(setTimeout(fn, ms));
-  useEffect(() => () => timers.current.forEach(clearTimeout), []);
+  useEffect(
+    () => () => {
+      timers.current.forEach(clearTimeout);
+      stopSpeaking();
+    },
+    []
+  );
 
-  // Ask the question whenever a new round appears.
+  // Ask the question whenever a new round appears (with a hello the first time).
   useEffect(() => {
-    speak(promptFor(round.target));
+    preloadLines([...round.choices.map(lines.thatsThe), lines.levelup]);
+    if (welcomed.current) {
+      say(lines.find(round.target));
+    } else {
+      welcomed.current = true;
+      say(lines.welcome, lines.find(round.target));
+    }
   }, [round]);
 
   const handleChoice = (choice) => {
     if (celebrating) return;
+    unlockAudio(); // re-wake audio if the phone suspended it
 
-    if (choice.label !== round.target.label) {
+    if (choice.id !== round.target.id) {
       // No penalty: name what they tapped, then ask again.
       playSound('oops');
-      setWrongLabel(choice.label);
-      speak(`That's the ${choice.label}. ${promptFor(round.target)}`);
-      later(() => setWrongLabel(null), 600);
+      setWrongId(choice.id);
+      say(lines.thatsThe(choice), lines.find(round.target));
+      later(() => setWrongId(null), 600);
       return;
     }
 
@@ -125,7 +135,7 @@ function GameScreen({ childName, flowers, setFlowers, difficulty, setDifficulty,
     setCelebrating(true);
     triggerConfetti();
     playSound(levelUp ? 'levelup' : 'success');
-    speak(levelUp ? `${praiseFor(childName)} Your garden is growing!` : praiseFor(childName));
+    say(levelUp ? lines.levelup : lines.praise());
 
     later(() => {
       setCelebrating(false);
@@ -147,23 +157,27 @@ function GameScreen({ childName, flowers, setFlowers, difficulty, setDifficulty,
 
       <button
         className="prompt"
-        onClick={() => speak(promptFor(round.target))}
+        onClick={() => {
+          unlockAudio();
+          say(lines.find(round.target));
+        }}
         aria-label="Hear the question again"
       >
         <span className="prompt-speaker" aria-hidden="true">🔊</span>
         <span>
-          Find the <strong>{round.target.label}</strong>!
+          Find {round.target.spoken.slice(0, -round.target.label.length)}
+          <strong>{round.target.label}</strong>!
         </span>
       </button>
 
       <div className="choices" key={round.id}>
         {round.choices.map((choice) => (
           <ChoiceButton
-            key={choice.label}
+            key={choice.id}
             choice={choice}
-            wrong={wrongLabel === choice.label}
-            correct={celebrating && choice.label === round.target.label}
-            dimmed={celebrating && choice.label !== round.target.label}
+            wrong={wrongId === choice.id}
+            correct={celebrating && choice.id === round.target.id}
+            dimmed={celebrating && choice.id !== round.target.id}
             onPress={() => handleChoice(choice)}
           />
         ))}

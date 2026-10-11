@@ -30,8 +30,25 @@ function getAudio() {
   const Ctor = window.AudioContext || window.webkitAudioContext;
   if (!Ctor) return null;
   if (!audioContext) audioContext = new Ctor();
-  if (audioContext.state === 'suspended') audioContext.resume();
+  // iOS reports 'interrupted' after a phone call or switching apps.
+  if (audioContext.state !== 'running') audioContext.resume().catch(() => {});
   return audioContext;
+}
+
+// Browsers only allow sound after the child has tapped something, so call this
+// from a tap handler (the Start button). On iPhone, the "playback" session
+// makes the game audible even when the ring/silent switch is on silent.
+export function unlockAudio() {
+  try {
+    if (navigator.audioSession) navigator.audioSession.type = 'playback';
+  } catch {}
+  const ctx = getAudio();
+  if (!ctx) return;
+  // A one-sample silent buffer started inside the tap unlocks iOS Safari.
+  const source = ctx.createBufferSource();
+  source.buffer = ctx.createBuffer(1, 1, 22050);
+  source.connect(ctx.destination);
+  source.start(0);
 }
 
 function tone(ctx, frequency, start, length, volume = 0.15) {
@@ -62,11 +79,78 @@ export function playSound(type) {
   }
 }
 
-export function speak(text) {
-  if (!('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.rate = 0.9;
-  utterance.pitch = 1.3;
-  window.speechSynthesis.speak(utterance);
+// ---------- Voice ----------
+// Spoken lines are recorded clips in public/voice. If a clip can't load or
+// decode, fall back to the browser's own text-to-speech for that line.
+
+const clipCache = new Map();
+let currentSource = null;
+let playToken = 0;
+
+function loadClip(name) {
+  if (!clipCache.has(name)) {
+    const ctx = getAudio();
+    const promise = fetch(`${import.meta.env.BASE_URL}voice/${name}.mp3`)
+      .then((res) => {
+        if (!res.ok) throw new Error(`clip ${name}: ${res.status}`);
+        return res.arrayBuffer();
+      })
+      // Callback form: older Safari doesn't return a promise from decodeAudioData.
+      .then((data) => new Promise((resolve, reject) => ctx.decodeAudioData(data, resolve, reject)));
+    promise.catch(() => clipCache.delete(name));
+    clipCache.set(name, promise);
+  }
+  return clipCache.get(name);
+}
+
+export function preloadLines(lines) {
+  if (!getAudio()) return;
+  lines.forEach((line) => loadClip(line.clip).catch(() => {}));
+}
+
+function playBuffer(ctx, buffer) {
+  return new Promise((resolve) => {
+    const source = ctx.createBufferSource();
+    source.buffer = buffer;
+    source.connect(ctx.destination);
+    source.onended = resolve;
+    currentSource = source;
+    source.start();
+  });
+}
+
+function speakFallback(text) {
+  return new Promise((resolve) => {
+    if (!('speechSynthesis' in window)) return resolve();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.rate = 0.9;
+    utterance.pitch = 1.2;
+    utterance.onend = resolve;
+    utterance.onerror = resolve;
+    window.speechSynthesis.speak(utterance);
+  });
+}
+
+export function stopSpeaking() {
+  playToken++;
+  try {
+    currentSource?.stop();
+  } catch {}
+  currentSource = null;
+  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+}
+
+// Say one or more lines in order, interrupting anything already being said.
+export async function say(...lines) {
+  stopSpeaking();
+  const token = playToken;
+  const ctx = getAudio();
+  for (const line of lines) {
+    if (token !== playToken) return;
+    let buffer = null;
+    if (ctx) buffer = await loadClip(line.clip).catch(() => null);
+    if (token !== playToken) return;
+    if (buffer) await playBuffer(ctx, buffer);
+    else await speakFallback(line.text);
+  }
 }

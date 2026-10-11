@@ -1,0 +1,238 @@
+{
+  "colors": [
+    {
+      "id": "red",
+      "emoji": "🔴",
+      "label": "Red",
+      "color": "#FF6B6B",
+      "spoken": "red"
+    },
+    {
+      "id": "blue",
+      "emoji": "🔵",
+      "label": "Blue",
+      "color": "#4D96FF",
+      "spoken": "blue"
+    },
+    {
+      "id": "green",
+      "emoji": "🟢",
+      "label": "Green",
+      "color": "#6BCB77",
+      "spoken": "green"
+    },
+    {
+      "id": "yellow",
+      "emoji": "🟡",
+      "label": "Yellow",
+      "color": "#F4C430",
+      "spoken": "yellow"
+    },
+    {
+      "id": "purple",
+      "emoji": "🟣",
+      "label": "Purple",
+      "color": "#C67BFF",
+      "spoken": "purple"
+    },
+    {
+      "id": "orange",
+      "emoji": "🟠",
+      "label": "Orange",
+      "color": "#FF8C42",
+      "spoken": "orange"
+    }
+  ],
+  "animals": [
+    {
+      "id": "doggy",
+      "emoji": "🐶",
+      "label": "Doggy",
+      "color": "#FFB84C",
+      "spoken": "the Doggy"
+    },
+    {
+      "id": "kitty",
+      "emoji": "🐱",
+      "label": "Kitty",
+      "color": "#FF6B9D",
+      "spoken": "the Kitty"
+    },
+    {
+      "id": "cow",
+      "emoji": "🐮",
+      "label": "Cow",
+      "color": "#95E1D3",
+      "spoken": "the Cow"
+    },
+    {
+      "id": "piggy",
+      "emoji": "🐷",
+      "label": "Piggy",
+      "color": "#FF8FAB",
+      "spoken": "the Piggy"
+    },
+    {
+      "id": "froggy",
+      "emoji": "🐸",
+      "label": "Froggy",
+      "color": "#6BCB77",
+      "spoken": "the Froggy"
+    },
+    {
+      "id": "lion",
+      "emoji": "🦁",
+      "label": "Lion",
+      "color": "#F4A259",
+      "spoken": "the Lion"
+    }
+  ],
+  "shapes": [
+    {
+      "id": "star",
+      "emoji": "⭐",
+      "label": "Star",
+      "color": "#F4C430",
+      "spoken": "the Star"
+    },
+    {
+      "id": "heart",
+      "emoji": "❤️",
+      "label": "Heart",
+      "color": "#FF6B9D",
+      "spoken": "the Heart"
+    },
+    {
+      "id": "moon",
+      "emoji": "🌙",
+      "label": "Moon",
+      "color": "#7B8CDE",
+      "spoken": "the Moon"
+    },
+    {
+      "id": "sun",
+      "emoji": "☀️",
+      "label": "Sun",
+      "color": "#FF8C42",
+      "spoken": "the Sun"
+    },
+    {
+      "id": "triangle",
+      "emoji": "🔺",
+      "label": "Triangle",
+      "color": "#4ECDC4",
+      "spoken": "the Triangle"
+    }
+  ],
+  "food": [
+    {
+      "id": "apple",
+      "emoji": "🍎",
+      "label": "Apple",
+      "color": "#FF6B6B",
+      "spoken": "the Apple"
+    },
+    {
+      "id": "banana",
+      "emoji": "🍌",
+      "label": "Banana",
+      "color": "#F4C430",
+      "spoken": "the Banana"
+    },
+    {
+      "id": "strawberry",
+      "emoji": "🍓",
+      "label": "Strawberry",
+      "color": "#FF6B9D",
+      "spoken": "the Strawberry"
+    },
+    {
+      "id": "carrot",
+      "emoji": "🥕",
+      "label": "Carrot",
+      "color": "#FF8C42",
+      "spoken": "the Carrot"
+    },
+    {
+      "id": "cookie",
+      "emoji": "🍪",
+      "label": "Cookie",
+      "color": "#C08552",
+      "spoken": "the Cookie"
+    }
+  ],
+  "critters": [
+    {
+      "id": "butterfly",
+      "emoji": "🦋",
+      "label": "Butterfly",
+      "color": "#FF8C42",
+      "spoken": "the Butterfly"
+    },
+    {
+      "id": "turtle",
+      "emoji": "🐢",
+      "label": "Turtle",
+      "color": "#4ECDC4",
+      "spoken": "the Turtle"
+    },
+    {
+      "id": "bee",
+      "emoji": "🐝",
+      "label": "Bee",
+      "color": "#F4C430",
+      "spoken": "the Bee"
+    },
+    {
+      "id": "ladybug",
+      "emoji": "🐞",
+      "label": "Ladybug",
+      "color": "#FF6B6B",
+      "spoken": "the Ladybug"
+    },
+    {
+      "id": "snail",
+      "emoji": "🐌",
+      "label": "Snail",
+      "color": "#C67BFF",
+      "spoken": "the Snail"
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "car",
+      "emoji": "🚗",
+      "label": "Car",
+      "color": "#FF6B6B",
+      "spoken": "the Car"
+    },
+    {
+      "id": "bus",
+      "emoji": "🚌",
+      "label": "Bus",
+      "color": "#F4C430",
+      "spoken": "the Bus"
+    },
+    {
+      "id": "airplane",
+      "emoji": "✈️",
+      "label": "Airplane",
+      "color": "#4D96FF",
+      "spoken": "the Airplane"
+    },
+    {
+      "id": "train",
+      "emoji": "🚂",
+      "label": "Train",
+      "color": "#6BCB77",
+      "spoken": "the Train"
+    },
+    {
+      "id": "boat",
+      "emoji": "⛵",
+      "label": "Boat",
+      "color": "#4ECDC4",
+      "spoken": "the Boat"
+    }
+  ]
+}

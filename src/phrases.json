@@ -1,0 +1,12 @@
+{
+  "welcome": "Hi! Let's grow a garden!",
+  "praise": [
+    "Great job!",
+    "You did it!",
+    "Wonderful!",
+    "Yay!",
+    "Super!",
+    "Amazing!"
+  ],
+  "levelup": "Wow! Your garden is growing!"
+}
