@@ -69,8 +69,8 @@ export const lines = {
   welcome: { clip: 'welcome', text: PHRASES.welcome },
   roundDone: { clip: 'round-done', text: PHRASES.roundDone },
   takeBreak: { clip: 'take-break', text: PHRASES.takeBreak },
-  find: (item) => ({ clip: `find-${item.id}`, text: `Can you find ${item.spoken}?` }),
-  thatsThe: (item) => ({ clip: `thats-${item.id}`, text: `That's ${item.spoken}!` }),
+  find: (item) => ({ clip: `find-${item.id}`, text: `Can you find ${item.spoken}? Where's ${item.spoken}?` }),
+  thatsThe: (item) => ({ clip: `thats-${item.id}`, text: `Oh! That's ${item.spoken}. Let's try again!` }),
   praise: () => {
     const index = Math.floor(Math.random() * PHRASES.praise.length);
     return { clip: `praise-${index}`, text: PHRASES.praise[index] };

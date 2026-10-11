@@ -1,13 +1,13 @@
 {
-  "welcome": "Hi! Let's grow a garden!",
+  "welcome": "Hi friend! Let's grow a garden together!",
   "praise": [
+    "Yay! You found it!",
     "Great job!",
     "You did it!",
     "Wonderful!",
-    "Yay!",
-    "Super!",
+    "Woohoo!",
     "Amazing!"
   ],
-  "roundDone": "Wow! Your garden is growing!",
-  "takeBreak": "Time for a break! Let's dance!"
+  "roundDone": "Wow! Look at your garden grow!",
+  "takeBreak": "Time for a break! Let's dance together!"
 }
