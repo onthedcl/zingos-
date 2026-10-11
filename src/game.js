@@ -30,13 +30,28 @@ function pick(list) {
   return list[Math.floor(Math.random() * list.length)];
 }
 
+// Items that look too alike for a toddler (e.g. a tabby cat and a lion) list
+// each other in `notWith`; they never appear together in one round.
+function clashes(a, b) {
+  return a.notWith?.includes(b.id) || b.notWith?.includes(a.id);
+}
+
+function pickChoices(pool, count) {
+  const chosen = [];
+  for (const item of shuffle(pool)) {
+    if (chosen.length === count) break;
+    if (!chosen.some((other) => clashes(item, other))) chosen.push(item);
+  }
+  return chosen;
+}
+
 // Build a round: a set of choices plus the one the child should find.
 // Avoids repeating the previous target so the game doesn't feel stuck.
 export function makeRound(difficulty, previousTarget) {
   const level = LEVELS[Math.min(difficulty, MAX_DIFFICULTY)];
   const category = pick(level.categories);
   const pool = CATEGORIES[category];
-  const choices = shuffle(pool).slice(0, level.choices);
+  const choices = pickChoices(pool, level.choices);
   const candidates = choices.filter((c) => c.id !== previousTarget?.id);
   const target = pick(candidates.length ? candidates : choices);
   return { id: Math.random(), choices, target };

@@ -65,7 +65,13 @@
       "emoji": "🐱",
       "label": "Cat",
       "color": "#FF6B9D",
-      "spoken": "the Cat"
+      "spoken": "the Cat",
+      "photo": {
+        "file": "cat.webp"
+      },
+      "notWith": [
+        "lion"
+      ]
     },
     {
       "id": "cow",
