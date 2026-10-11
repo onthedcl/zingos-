@@ -6,7 +6,7 @@ A tap-to-find game for toddlers. Bloomba says "Can you find the Cat?", and each 
 - **Rounds of 5:** dots show progress. Each finished round ends on a "Round done!" screen where the new flowers pop into the garden, with "Play again" or "Done for now".
 - **A drawn garden:** sky, sun, clouds and a flower bed. Each right answer plants a flower, and each round's flowers get their own colour and style.
 - **Difficulty grows every round:** more choices on screen (2 → 3 → 4) and new categories (colors and animals, then vehicles, then shapes, then food and bugs).
-- **Spoken prompts** use the browser's built-in text-to-speech. Tap the 🔊 bubble to hear the question again.
+- **Spoken prompts** are recorded voice clips (made with `scripts/make_voice.py`). Tap the 🔊 bubble to hear the question again.
 - **Progress is saved** in the browser (localStorage).
 
 ## Run it
