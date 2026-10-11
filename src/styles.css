@@ -1,0 +1,317 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  font-family: 'Arial Rounded MT Bold', 'Nunito', Arial, sans-serif;
+  background: #ffe66d;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  overflow: hidden;
+}
+
+button {
+  font-family: inherit;
+  touch-action: manipulation;
+}
+
+/* ---------- Setup ---------- */
+
+.setup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #ffe66d 0%, #ff8c42 100%);
+}
+
+.setup-content {
+  text-align: center;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  font-size: 80px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.title {
+  font-size: 56px;
+  margin: 0 0 8px;
+  color: #fff;
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.12);
+}
+
+.subtitle {
+  font-size: 24px;
+  color: #fff;
+  margin: 0 0 20px;
+}
+
+.name-input {
+  font-size: 24px;
+  padding: 14px;
+  border-radius: 16px;
+  border: none;
+  width: 100%;
+  margin-bottom: 20px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  user-select: text;
+}
+
+.start-button {
+  font-size: 24px;
+  padding: 16px 36px;
+  border-radius: 16px;
+  border: none;
+  background: #ff6b9d;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 6px 0 #d94f80;
+  transition: transform 0.1s;
+}
+
+.start-button:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #d94f80;
+}
+
+.start-button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.saved-garden {
+  margin-top: 28px;
+  color: #fff;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.reset-button {
+  background: none;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  color: #fff;
+  border-radius: 12px;
+  padding: 6px 14px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* ---------- Game ---------- */
+
+.game {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 16px;
+  background: linear-gradient(135deg, #ffe66d 0%, #ff6b9d 100%);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon-button {
+  font-size: 24px;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-radius: 12px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.greeting {
+  color: #fff;
+  font-size: 26px;
+  margin: 0;
+  flex: 1;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flower-counter {
+  font-size: 30px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.prompt {
+  align-self: center;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 28px;
+  color: #444;
+  background: rgba(255, 255, 255, 0.92);
+  border: none;
+  border-radius: 999px;
+  padding: 12px 28px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.prompt strong {
+  color: #ff6b9d;
+}
+
+.prompt-speaker {
+  font-size: 26px;
+}
+
+.choices {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-content: center;
+  animation: pop-in 0.35s ease-out;
+}
+
+.choice {
+  width: min(40vw, 160px);
+  aspect-ratio: 1;
+  border-radius: 28px;
+  border: 4px solid rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transition: transform 0.15s, opacity 0.3s;
+}
+
+.choice:active {
+  transform: scale(0.94);
+}
+
+.choice-emoji {
+  font-size: min(16vw, 64px);
+  line-height: 1;
+}
+
+.choice-label {
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 8px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.choice.wiggle {
+  animation: wiggle 0.5s;
+}
+
+.choice.bounce {
+  animation: bounce 0.6s ease-in-out 2;
+}
+
+.choice.dimmed {
+  opacity: 0.35;
+}
+
+.garden {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 14px 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-height: 30vh;
+  overflow-y: auto;
+}
+
+.garden-title {
+  margin: 0 0 10px;
+  color: #333;
+  font-size: 18px;
+}
+
+.flower-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+  gap: 6px;
+}
+
+.garden-empty {
+  grid-column: 1 / -1;
+  color: #888;
+  font-size: 16px;
+}
+
+.flower-bloom {
+  font-size: 32px;
+  text-align: center;
+  animation: grow 0.5s ease-out;
+}
+
+.confetti {
+  position: fixed;
+  top: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ---------- Animations ---------- */
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0); }
+  20% { transform: rotate(-10deg); }
+  40% { transform: rotate(10deg); }
+  60% { transform: rotate(-6deg); }
+  80% { transform: rotate(6deg); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+@keyframes pop-in {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes grow {
+  from { transform: scale(0); }
+  70% { transform: scale(1.3); }
+  to { transform: scale(1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .confetti {
+    display: none;
+  }
+}
