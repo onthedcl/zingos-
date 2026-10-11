@@ -145,35 +145,50 @@
       "emoji": "🍎",
       "label": "Apple",
       "color": "#FF6B6B",
-      "spoken": "the Apple"
+      "spoken": "the Apple",
+      "photo": {
+        "file": "apple.webp"
+      }
     },
     {
       "id": "banana",
       "emoji": "🍌",
       "label": "Banana",
       "color": "#F4C430",
-      "spoken": "the Banana"
+      "spoken": "the Banana",
+      "photo": {
+        "file": "banana.webp"
+      }
     },
     {
       "id": "strawberry",
       "emoji": "🍓",
       "label": "Strawberry",
       "color": "#FF6B9D",
-      "spoken": "the Strawberry"
+      "spoken": "the Strawberry",
+      "photo": {
+        "file": "strawberry.webp"
+      }
     },
     {
       "id": "carrot",
       "emoji": "🥕",
       "label": "Carrot",
       "color": "#FF8C42",
-      "spoken": "the Carrot"
+      "spoken": "the Carrot",
+      "photo": {
+        "file": "carrot.webp"
+      }
     },
     {
       "id": "cookie",
       "emoji": "🍪",
       "label": "Cookie",
       "color": "#C08552",
-      "spoken": "the Cookie"
+      "spoken": "the Cookie",
+      "photo": {
+        "file": "cookie.webp"
+      }
     }
   ],
   "critters": [
