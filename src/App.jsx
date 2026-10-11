@@ -221,7 +221,7 @@ function ChoiceButton({ choice, onPress, wrong, correct, dimmed }) {
       aria-label={choice.label}
     >
       <Picture item={choice} />
-      <span className="choice-label">{choice.label}</span>
+      <span className={`choice-label${choice.label.length > 10 ? ' long' : ''}`}>{choice.label}</span>
     </button>
   );
 }

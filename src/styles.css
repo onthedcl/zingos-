@@ -402,3 +402,9 @@ button {
 .credits-panel a {
   color: #d94f80;
 }
+
+/* Long names like "Garbage Truck" stay on one line instead of covering the photo. */
+.choice-label.long {
+  font-size: 15px;
+  white-space: nowrap;
+}

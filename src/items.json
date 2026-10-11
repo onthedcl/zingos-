@@ -88,7 +88,10 @@
       "emoji": "🐷",
       "label": "Pig",
       "color": "#FF8FAB",
-      "spoken": "the Pig"
+      "spoken": "the Pig",
+      "photo": {
+        "file": "pig.webp"
+      }
     },
     {
       "id": "frog",
@@ -258,35 +261,50 @@
       "emoji": "🚗",
       "label": "Car",
       "color": "#FF6B6B",
-      "spoken": "the Car"
+      "spoken": "the Car",
+      "photo": {
+        "file": "car.webp"
+      }
     },
     {
-      "id": "bus",
-      "emoji": "🚌",
-      "label": "Bus",
-      "color": "#F4C430",
-      "spoken": "the Bus"
+      "id": "truck",
+      "emoji": "🚛",
+      "label": "Garbage Truck",
+      "color": "#6BCB77",
+      "spoken": "the Garbage Truck",
+      "photo": {
+        "file": "truck.webp"
+      }
     },
     {
       "id": "airplane",
       "emoji": "✈️",
       "label": "Airplane",
       "color": "#4D96FF",
-      "spoken": "the Airplane"
+      "spoken": "the Airplane",
+      "photo": {
+        "file": "airplane.webp"
+      }
     },
     {
       "id": "train",
       "emoji": "🚂",
       "label": "Train",
       "color": "#6BCB77",
-      "spoken": "the Train"
+      "spoken": "the Train",
+      "photo": {
+        "file": "train.webp"
+      }
     },
     {
       "id": "boat",
       "emoji": "⛵",
       "label": "Boat",
       "color": "#4ECDC4",
-      "spoken": "the Boat"
+      "spoken": "the Boat",
+      "photo": {
+        "file": "boat.webp"
+      }
     }
   ]
 }
