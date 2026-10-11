@@ -5,7 +5,7 @@ Setup, once:
     pip install kokoro-onnx soundfile
     curl -LO https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx
     curl -LO https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin
-Run from the repo root (needs ffmpeg):
+Run from the bloomba folder (needs ffmpeg):
     python scripts/make_voice.py --model-dir path/to/model/files
 
 The texts must match `lines` in src/game.js.
