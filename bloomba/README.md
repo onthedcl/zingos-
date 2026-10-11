@@ -3,7 +3,7 @@
 A tap-to-find game for toddlers. Bloomba says "Can you find the Cat?", and each right answer grows a flower in the child's garden.
 
 - **Wrong taps are never punished.** Bloomba names what was tapped and asks again.
-- **Difficulty grows every 5 flowers:** more choices on screen (2 → 3 → 4) and new categories (colors and animals, then shapes, then food and bugs, then vehicles).
+- **Difficulty grows every 5 flowers:** more choices on screen (2 → 3 → 4) and new categories (colors and animals, then vehicles, then shapes, then food and bugs).
 - **Spoken prompts** use the browser's built-in text-to-speech. Tap the 🔊 bubble to hear the question again.
 - **Progress is saved** in the browser (localStorage).
 
