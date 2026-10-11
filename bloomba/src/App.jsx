@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { makeRound, lines, MAX_DIFFICULTY, ROUND_LENGTH } from './game.js';
+import { makeRound, lines, MAX_DIFFICULTY, ROUND_LENGTH, BREAK_AFTER } from './game.js';
+import BreakScreen from './BreakScreen.jsx';
 import Garden from './Garden.jsx';
 import { Picture, Credits, hasCredits, preloadPhotos } from './Picture.jsx';
 import { triggerConfetti, playSound, unlockAudio, say, preloadLines, stopSpeaking } from './effects.js';
@@ -21,6 +22,8 @@ export default function Bloomba() {
   const [flowers, setFlowers] = useState(saved.flowers || 0);
   const [difficulty, setDifficulty] = useState(saved.difficulty || 0);
   const [showCredits, setShowCredits] = useState(false);
+  // Right answers since the last dance break (resets when the page is reopened).
+  const [sinceBreak, setSinceBreak] = useState(0);
 
   useEffect(() => {
     if (!gameStarted) return;
@@ -94,16 +97,19 @@ export default function Bloomba() {
       setFlowers={setFlowers}
       difficulty={difficulty}
       setDifficulty={setDifficulty}
+      sinceBreak={sinceBreak}
+      setSinceBreak={setSinceBreak}
       onExit={() => setGameStarted(false)}
     />
   );
 }
 
-function GameScreen({ childName, flowers, setFlowers, difficulty, setDifficulty, onExit }) {
+function GameScreen({ childName, flowers, setFlowers, difficulty, setDifficulty, sinceBreak, setSinceBreak, onExit }) {
   const [question, setQuestion] = useState(() => makeRound(difficulty));
   const [answered, setAnswered] = useState(0); // right answers so far this round
   const [roundStart, setRoundStart] = useState(flowers); // garden size when the round began
   const [roundDone, setRoundDone] = useState(false);
+  const [onBreak, setOnBreak] = useState(false);
   const [wrongId, setWrongId] = useState(null);
   const [celebrating, setCelebrating] = useState(false);
   const timers = useRef([]);
@@ -143,7 +149,9 @@ function GameScreen({ childName, flowers, setFlowers, difficulty, setDifficulty,
     }
 
     const newAnswered = answered + 1;
+    const newSinceBreak = sinceBreak + 1;
     setFlowers(flowers + 1);
+    setSinceBreak(newSinceBreak);
     setAnswered(newAnswered);
     setCelebrating(true);
     triggerConfetti();
@@ -158,11 +166,16 @@ function GameScreen({ childName, flowers, setFlowers, difficulty, setDifficulty,
       return;
     }
 
-    // Last question of the round: show the garden celebration.
+    // Last question of the round: a dance break if it's been a while,
+    // otherwise the garden celebration.
     later(() => {
       setCelebrating(false);
-      setRoundDone(true);
       if (difficulty < MAX_DIFFICULTY) setDifficulty(difficulty + 1);
+      if (newSinceBreak >= BREAK_AFTER) {
+        setOnBreak(true);
+        return;
+      }
+      setRoundDone(true);
       triggerConfetti();
       playSound('levelup');
       say(lines.roundDone);
@@ -176,6 +189,23 @@ function GameScreen({ childName, flowers, setFlowers, difficulty, setDifficulty,
     setRoundDone(false);
     setQuestion(makeRound(difficulty));
   };
+
+  if (onBreak) {
+    return (
+      <BreakScreen
+        childName={childName}
+        onKeepPlaying={() => {
+          setSinceBreak(0);
+          setOnBreak(false);
+          playAgain();
+        }}
+        onDone={() => {
+          setSinceBreak(0);
+          onExit();
+        }}
+      />
+    );
+  }
 
   if (roundDone) {
     return (

@@ -70,13 +70,13 @@ if (typeof document !== 'undefined') {
   });
 }
 
-function tone(ctx, frequency, start, length, volume = 0.15) {
+function tone(ctx, frequency, start, length, volume = 0.15, destination = ctx.destination) {
   const oscillator = ctx.createOscillator();
   const gain = ctx.createGain();
   oscillator.type = 'triangle';
   oscillator.frequency.value = frequency;
   oscillator.connect(gain);
-  gain.connect(ctx.destination);
+  gain.connect(destination);
   gain.gain.setValueAtTime(volume, ctx.currentTime + start);
   gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + start + length);
   oscillator.start(ctx.currentTime + start);
@@ -96,6 +96,42 @@ export function playSound(type) {
   } else if (type === 'oops') {
     tone(ctx, 330, 0, 0.2, 0.08);
   }
+}
+
+// A bouncy little dance tune for the break screen: [frequency, beats].
+const TUNE = [
+  [659, 1], [659, 1], [784, 1], [659, 1], [523, 1], [587, 1], [659, 2],
+  [698, 1], [698, 1], [880, 1], [698, 1], [587, 1], [659, 1], [698, 2],
+  [784, 1], [659, 1], [523, 1], [659, 1], [784, 1], [784, 1], [880, 2],
+  [698, 1], [659, 1], [587, 1], [523, 3],
+];
+const BEAT = 0.22;
+const TUNE_REPEATS = 3;
+
+// Plays the tune a few times (about half a minute). Returns a function that
+// stops it straight away.
+export function playTune() {
+  const ctx = getAudio();
+  if (!ctx) return () => {};
+  const master = ctx.createGain();
+  master.connect(ctx.destination);
+  const beats = TUNE.reduce((n, [, b]) => n + b, 0);
+  for (let r = 0; r < TUNE_REPEATS; r++) {
+    let t = 0.3 + r * beats * BEAT;
+    for (const [freq, b] of TUNE) {
+      tone(ctx, freq, t, b * BEAT * 0.9, 0.09, master);
+      t += b * BEAT;
+    }
+    // Soft oom-pah bass every two beats
+    for (let k = 0; k < beats; k += 2) {
+      tone(ctx, k % 4 ? 196 : 131, 0.3 + (r * beats + k) * BEAT, BEAT * 1.5, 0.06, master);
+    }
+  }
+  return () => {
+    try {
+      master.disconnect();
+    } catch {}
+  };
 }
 
 // ---------- Voice ----------
