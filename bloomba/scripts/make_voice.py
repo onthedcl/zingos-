@@ -29,7 +29,7 @@ def all_lines():
     items = json.loads((ROOT / "src" / "items.json").read_text())
     phrases = json.loads((ROOT / "src" / "phrases.json").read_text())
     yield "welcome", phrases["welcome"]
-    yield "levelup", phrases["levelup"]
+    yield "round-done", phrases["roundDone"]
     for i, text in enumerate(phrases["praise"]):
         yield f"praise-{i}", text
     for category in items.values():

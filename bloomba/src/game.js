@@ -15,7 +15,8 @@ export const LEVELS = [
 ];
 
 export const MAX_DIFFICULTY = LEVELS.length - 1;
-export const FLOWERS_PER_LEVEL = 5;
+// Questions per round; difficulty goes up by one level after each finished round.
+export const ROUND_LENGTH = 5;
 
 function shuffle(list) {
   const copy = [...list];
@@ -62,7 +63,7 @@ export function makeRound(difficulty, previousTarget) {
 // fallback if the clip can't play.
 export const lines = {
   welcome: { clip: 'welcome', text: PHRASES.welcome },
-  levelup: { clip: 'levelup', text: PHRASES.levelup },
+  roundDone: { clip: 'round-done', text: PHRASES.roundDone },
   find: (item) => ({ clip: `find-${item.id}`, text: `Can you find ${item.spoken}?` }),
   thatsThe: (item) => ({ clip: `thats-${item.id}`, text: `That's ${item.spoken}!` }),
   praise: () => {
