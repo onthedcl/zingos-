@@ -1,0 +1,320 @@
+{
+  "colors": [
+    {
+      "id": "red",
+      "emoji": "🔴",
+      "label": "Red",
+      "color": "#FF6B6B",
+      "spoken": "red",
+      "kind": "color"
+    },
+    {
+      "id": "blue",
+      "emoji": "🔵",
+      "label": "Blue",
+      "color": "#4D96FF",
+      "spoken": "blue",
+      "kind": "color"
+    },
+    {
+      "id": "green",
+      "emoji": "🟢",
+      "label": "Green",
+      "color": "#6BCB77",
+      "spoken": "green",
+      "kind": "color"
+    },
+    {
+      "id": "yellow",
+      "emoji": "🟡",
+      "label": "Yellow",
+      "color": "#F4C430",
+      "spoken": "yellow",
+      "kind": "color"
+    },
+    {
+      "id": "purple",
+      "emoji": "🟣",
+      "label": "Purple",
+      "color": "#C67BFF",
+      "spoken": "purple",
+      "kind": "color"
+    },
+    {
+      "id": "orange",
+      "emoji": "🟠",
+      "label": "Orange",
+      "color": "#FF8C42",
+      "spoken": "orange",
+      "kind": "color"
+    }
+  ],
+  "animals": [
+    {
+      "id": "dog",
+      "emoji": "🐶",
+      "label": "Dog",
+      "color": "#FFB84C",
+      "spoken": "the Dog",
+      "photo": {
+        "file": "dog.webp"
+      }
+    },
+    {
+      "id": "cat",
+      "emoji": "🐱",
+      "label": "Cat",
+      "color": "#FF6B9D",
+      "spoken": "the Cat",
+      "photo": {
+        "file": "cat.webp"
+      },
+      "notWith": [
+        "lion"
+      ]
+    },
+    {
+      "id": "cow",
+      "emoji": "🐮",
+      "label": "Cow",
+      "color": "#95E1D3",
+      "spoken": "the Cow",
+      "photo": {
+        "file": "cow.webp"
+      }
+    },
+    {
+      "id": "pig",
+      "emoji": "🐷",
+      "label": "Pig",
+      "color": "#FF8FAB",
+      "spoken": "the Pig",
+      "photo": {
+        "file": "pig.webp"
+      }
+    },
+    {
+      "id": "frog",
+      "emoji": "🐸",
+      "label": "Frog",
+      "color": "#6BCB77",
+      "spoken": "the Frog",
+      "photo": {
+        "file": "frog.webp"
+      }
+    },
+    {
+      "id": "lion",
+      "emoji": "🦁",
+      "label": "Lion",
+      "color": "#F4A259",
+      "spoken": "the Lion",
+      "photo": {
+        "file": "lion.webp"
+      }
+    }
+  ],
+  "shapes": [
+    {
+      "id": "star",
+      "emoji": "⭐",
+      "label": "Star",
+      "color": "#F4C430",
+      "spoken": "the Star"
+    },
+    {
+      "id": "heart",
+      "emoji": "❤️",
+      "label": "Heart",
+      "color": "#FF6B9D",
+      "spoken": "the Heart"
+    },
+    {
+      "id": "moon",
+      "emoji": "🌙",
+      "label": "Moon",
+      "color": "#7B8CDE",
+      "spoken": "the Moon"
+    },
+    {
+      "id": "sun",
+      "emoji": "☀️",
+      "label": "Sun",
+      "color": "#FF8C42",
+      "spoken": "the Sun"
+    },
+    {
+      "id": "triangle",
+      "emoji": "🔺",
+      "label": "Triangle",
+      "color": "#4ECDC4",
+      "spoken": "the Triangle"
+    }
+  ],
+  "food": [
+    {
+      "id": "apple",
+      "emoji": "🍎",
+      "label": "Apple",
+      "color": "#FF6B6B",
+      "spoken": "the Apple",
+      "photo": {
+        "file": "apple.webp"
+      }
+    },
+    {
+      "id": "banana",
+      "emoji": "🍌",
+      "label": "Banana",
+      "color": "#F4C430",
+      "spoken": "the Banana",
+      "photo": {
+        "file": "banana.webp"
+      }
+    },
+    {
+      "id": "strawberry",
+      "emoji": "🍓",
+      "label": "Strawberry",
+      "color": "#FF6B9D",
+      "spoken": "the Strawberry",
+      "photo": {
+        "file": "strawberry.webp"
+      }
+    },
+    {
+      "id": "carrot",
+      "emoji": "🥕",
+      "label": "Carrot",
+      "color": "#FF8C42",
+      "spoken": "the Carrot",
+      "photo": {
+        "file": "carrot.webp"
+      }
+    },
+    {
+      "id": "cookie",
+      "emoji": "🍪",
+      "label": "Cookie",
+      "color": "#C08552",
+      "spoken": "the Cookie",
+      "photo": {
+        "file": "cookie.webp"
+      }
+    }
+  ],
+  "critters": [
+    {
+      "id": "butterfly",
+      "emoji": "🦋",
+      "label": "Butterfly",
+      "color": "#FF8C42",
+      "spoken": "the Butterfly",
+      "photo": {
+        "file": "butterfly.webp"
+      }
+    },
+    {
+      "id": "turtle",
+      "emoji": "🐢",
+      "label": "Turtle",
+      "color": "#4ECDC4",
+      "spoken": "the Turtle",
+      "photo": {
+        "file": "turtle.webp"
+      }
+    },
+    {
+      "id": "bee",
+      "emoji": "🐝",
+      "label": "Bee",
+      "color": "#F4C430",
+      "spoken": "the Bee",
+      "photo": {
+        "file": "bee.webp"
+      }
+    },
+    {
+      "id": "ladybug",
+      "emoji": "🐞",
+      "label": "Ladybug",
+      "color": "#FF6B6B",
+      "spoken": "the Ladybug",
+      "photo": {
+        "file": "ladybug.webp"
+      }
+    },
+    {
+      "id": "snail",
+      "emoji": "🐌",
+      "label": "Snail",
+      "color": "#C67BFF",
+      "spoken": "the Snail",
+      "photo": {
+        "file": "snail.webp"
+      }
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "car",
+      "emoji": "🚗",
+      "label": "Car",
+      "color": "#FF6B6B",
+      "spoken": "the Car",
+      "photo": {
+        "file": "car.webp"
+      }
+    },
+    {
+      "id": "bus",
+      "emoji": "🚌",
+      "label": "Bus",
+      "color": "#F4C430",
+      "spoken": "the Bus",
+      "photo": {
+        "file": "bus.webp"
+      }
+    },
+    {
+      "id": "truck",
+      "emoji": "🚛",
+      "label": "Garbage Truck",
+      "color": "#6BCB77",
+      "spoken": "the Garbage Truck",
+      "photo": {
+        "file": "truck.webp"
+      }
+    },
+    {
+      "id": "airplane",
+      "emoji": "✈️",
+      "label": "Airplane",
+      "color": "#4D96FF",
+      "spoken": "the Airplane",
+      "photo": {
+        "file": "airplane.webp"
+      }
+    },
+    {
+      "id": "train",
+      "emoji": "🚂",
+      "label": "Train",
+      "color": "#6BCB77",
+      "spoken": "the Train",
+      "photo": {
+        "file": "train.webp"
+      }
+    },
+    {
+      "id": "boat",
+      "emoji": "⛵",
+      "label": "Boat",
+      "color": "#4ECDC4",
+      "spoken": "the Boat",
+      "photo": {
+        "file": "boat.webp"
+      }
+    }
+  ]
+}
