@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { makeRound, lines, MAX_DIFFICULTY, FLOWERS_PER_LEVEL } from './game.js';
+import { makeRound, lines, MAX_DIFFICULTY, ROUND_LENGTH } from './game.js';
+import Garden from './Garden.jsx';
 import { Picture, Credits, hasCredits, preloadPhotos } from './Picture.jsx';
 import { triggerConfetti, playSound, unlockAudio, say, preloadLines, stopSpeaking } from './effects.js';
 
@@ -66,7 +67,10 @@ export default function Bloomba() {
           </button>
           {flowers > 0 && (
             <div className="saved-garden">
-              <span>Your garden has {flowers} 🌸</span>
+              <div className="setup-garden">
+                <Garden flowers={flowers} />
+              </div>
+              <span>Your garden has {flowers} flower{flowers === 1 ? '' : 's'}</span>
               <button type="button" className="reset-button" onClick={handleReset}>
                 Start a new garden
               </button>
@@ -96,7 +100,10 @@ export default function Bloomba() {
 }
 
 function GameScreen({ childName, flowers, setFlowers, difficulty, setDifficulty, onExit }) {
-  const [round, setRound] = useState(() => makeRound(difficulty));
+  const [question, setQuestion] = useState(() => makeRound(difficulty));
+  const [answered, setAnswered] = useState(0); // right answers so far this round
+  const [roundStart, setRoundStart] = useState(flowers); // garden size when the round began
+  const [roundDone, setRoundDone] = useState(false);
   const [wrongId, setWrongId] = useState(null);
   const [celebrating, setCelebrating] = useState(false);
   const timers = useRef([]);
@@ -111,46 +118,86 @@ function GameScreen({ childName, flowers, setFlowers, difficulty, setDifficulty,
     []
   );
 
-  // Ask the question whenever a new round appears (with a hello the first time).
+  // Ask the question whenever a new one appears (with a hello the first time).
   useEffect(() => {
-    preloadLines([...round.choices.map(lines.thatsThe), lines.levelup]);
+    preloadLines([...question.choices.map(lines.thatsThe), lines.roundDone]);
     if (welcomed.current) {
-      say(lines.find(round.target));
+      say(lines.find(question.target));
     } else {
       welcomed.current = true;
-      say(lines.welcome, lines.find(round.target));
+      say(lines.welcome, lines.find(question.target));
     }
-  }, [round]);
+  }, [question]);
 
   const handleChoice = (choice) => {
     if (celebrating) return;
     unlockAudio(); // re-wake audio if the phone suspended it
 
-    if (choice.id !== round.target.id) {
+    if (choice.id !== question.target.id) {
       // No penalty: name what they tapped, then ask again.
       playSound('oops');
       setWrongId(choice.id);
-      say(lines.thatsThe(choice), lines.find(round.target));
+      say(lines.thatsThe(choice), lines.find(question.target));
       later(() => setWrongId(null), 600);
       return;
     }
 
-    const newFlowers = flowers + 1;
-    const levelUp = newFlowers % FLOWERS_PER_LEVEL === 0 && difficulty < MAX_DIFFICULTY;
-    const nextDifficulty = levelUp ? difficulty + 1 : difficulty;
-
-    setFlowers(newFlowers);
-    if (levelUp) setDifficulty(nextDifficulty);
+    const newAnswered = answered + 1;
+    setFlowers(flowers + 1);
+    setAnswered(newAnswered);
     setCelebrating(true);
     triggerConfetti();
-    playSound(levelUp ? 'levelup' : 'success');
-    say(levelUp ? lines.levelup : lines.praise());
+    playSound('success');
+    say(lines.praise());
 
+    if (newAnswered < ROUND_LENGTH) {
+      later(() => {
+        setCelebrating(false);
+        setQuestion(makeRound(difficulty, question.target));
+      }, 1800);
+      return;
+    }
+
+    // Last question of the round: show the garden celebration.
     later(() => {
       setCelebrating(false);
-      setRound(makeRound(nextDifficulty, round.target));
-    }, 1800);
+      setRoundDone(true);
+      if (difficulty < MAX_DIFFICULTY) setDifficulty(difficulty + 1);
+      triggerConfetti();
+      playSound('levelup');
+      say(lines.roundDone);
+    }, 1500);
   };
+
+  const playAgain = () => {
+    unlockAudio();
+    setAnswered(0);
+    setRoundStart(flowers);
+    setRoundDone(false);
+    setQuestion(makeRound(difficulty));
+  };
+
+  if (roundDone) {
+    return (
+      <div className="round-done">
+        <h2 className="round-title">Round done!</h2>
+        <p className="round-sub">
+          {childName}'s garden has {flowers} flower{flowers === 1 ? '' : 's'}
+        </p>
+        <div className="round-garden">
+          <Garden flowers={flowers} newFrom={roundStart} />
+        </div>
+        <div className="round-actions">
+          <button className="start-button" onClick={playAgain}>
+            Play again 🌼
+          </button>
+          <button className="done-button" onClick={onExit}>
+            Done for now
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="game">
@@ -168,46 +215,42 @@ function GameScreen({ childName, flowers, setFlowers, difficulty, setDifficulty,
         className="prompt"
         onClick={() => {
           unlockAudio();
-          say(lines.find(round.target));
+          say(lines.find(question.target));
         }}
         aria-label="Hear the question again"
       >
         <span className="prompt-speaker" aria-hidden="true">🔊</span>
         <span>
-          Find {round.target.spoken.slice(0, -round.target.label.length)}
-          <strong>{round.target.label}</strong>!
+          Find {question.target.spoken.slice(0, -question.target.label.length)}
+          <strong>{question.target.label}</strong>!
         </span>
       </button>
 
-      <div className="choices" key={round.id}>
-        {round.choices.map((choice) => (
+      <div className="round-progress" aria-label={`${answered} of ${ROUND_LENGTH} found this round`}>
+        {Array.from({ length: ROUND_LENGTH }).map((_, i) => (
+          <span key={i} className={`progress-dot${i < answered ? ' done' : ''}`} />
+        ))}
+      </div>
+
+      <div className="choices" key={question.id}>
+        {question.choices.map((choice) => (
           <ChoiceButton
             key={choice.id}
             choice={choice}
             wrong={wrongId === choice.id}
-            correct={celebrating && choice.id === round.target.id}
-            dimmed={celebrating && choice.id !== round.target.id}
+            correct={celebrating && choice.id === question.target.id}
+            dimmed={celebrating && choice.id !== question.target.id}
             onPress={() => handleChoice(choice)}
           />
         ))}
       </div>
 
       <section className="garden">
-        <h3 className="garden-title">Your Garden 🌼</h3>
-        <div className="flower-grid">
-          {flowers === 0 && <span className="garden-empty">Find things to grow flowers!</span>}
-          {Array.from({ length: flowers }).map((_, i) => (
-            <span key={i} className="flower-bloom">
-              {GARDEN_FLOWERS[i % GARDEN_FLOWERS.length]}
-            </span>
-          ))}
-        </div>
+        <Garden flowers={flowers} newFrom={roundStart} compact />
       </section>
     </div>
   );
 }
-
-const GARDEN_FLOWERS = ['🌸', '🌼', '🌷', '🌻', '🌺', '💐'];
 
 function ChoiceButton({ choice, onPress, wrong, correct, dimmed }) {
   const className = ['choice', choice.photo && 'has-photo', wrong && 'wiggle', correct && 'bounce', dimmed && 'dimmed']
