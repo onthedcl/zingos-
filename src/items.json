@@ -55,7 +55,10 @@
       "emoji": "🐶",
       "label": "Dog",
       "color": "#FFB84C",
-      "spoken": "the Dog"
+      "spoken": "the Dog",
+      "photo": {
+        "file": "dog.webp"
+      }
     },
     {
       "id": "cat",
