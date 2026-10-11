@@ -21,8 +21,9 @@ from kokoro_onnx import Kokoro
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "public" / "voice"
-VOICE = "af_heart"
+VOICE = "bf_alice"  # warm, high British voice
 SPEED = 0.85
+LANG = "en-gb"
 
 
 def all_lines():
@@ -35,8 +36,8 @@ def all_lines():
         yield f"praise-{i}", text
     for category in items.values():
         for item in category:
-            yield f"find-{item['id']}", f"Can you find {item['spoken']}?"
-            yield f"thats-{item['id']}", f"That's {item['spoken']}!"
+            yield f"find-{item['id']}", f"Can you find {item['spoken']}? Where's {item['spoken']}?"
+            yield f"thats-{item['id']}", f"Oh! That's {item['spoken']}. Let's try again!"
 
 
 def main():
@@ -48,7 +49,7 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory() as tmp:
         for name, text in all_lines():
-            samples, rate = kokoro.create(text, voice=VOICE, speed=SPEED, lang="en-us")
+            samples, rate = kokoro.create(text, voice=VOICE, speed=SPEED, lang=LANG)
             wav = Path(tmp) / f"{name}.wav"
             sf.write(wav, samples, rate)
             # Trim leading silence, add a short tail, encode as small mono mp3.
