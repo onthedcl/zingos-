@@ -9,9 +9,9 @@ export { CATEGORIES };
 // Difficulty mixes two dials: more choices on screen, and new categories unlocked.
 export const LEVELS = [
   { choices: 2, categories: ['colors', 'animals'] },
-  { choices: 3, categories: ['colors', 'animals', 'shapes'] },
-  { choices: 3, categories: ['colors', 'animals', 'shapes', 'food', 'critters'] },
-  { choices: 4, categories: ['colors', 'animals', 'shapes', 'food', 'critters', 'vehicles'] },
+  { choices: 3, categories: ['colors', 'animals', 'vehicles'] },
+  { choices: 3, categories: ['colors', 'animals', 'vehicles', 'shapes'] },
+  { choices: 4, categories: ['colors', 'animals', 'vehicles', 'shapes', 'food', 'critters'] },
 ];
 
 export const MAX_DIFFICULTY = LEVELS.length - 1;
