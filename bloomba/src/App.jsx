@@ -222,7 +222,15 @@ function GameScreen({ childName, flowers, setFlowers, difficulty, setDifficulty,
         <span className="prompt-speaker" aria-hidden="true">🔊</span>
         <span>
           Find {question.target.spoken.slice(0, -question.target.label.length)}
-          <strong>{question.target.label}</strong>!
+          {question.target.kind === 'color' ? (
+            // Colour words are shown in their own colour ("Blue" in blue).
+            <strong className="color-word" style={{ color: question.target.color }}>
+              {question.target.label}
+            </strong>
+          ) : (
+            <strong>{question.target.label}</strong>
+          )}
+          !
         </span>
       </button>
 
