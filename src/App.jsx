@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { makeRound, lines, MAX_DIFFICULTY, FLOWERS_PER_LEVEL } from './game.js';
+import { Picture, Credits, preloadPhotos } from './Picture.jsx';
 import { triggerConfetti, playSound, unlockAudio, say, preloadLines, stopSpeaking } from './effects.js';
 
 const STORAGE_KEY = 'bloomba-state';
@@ -18,6 +19,7 @@ export default function Bloomba() {
   const [gameStarted, setGameStarted] = useState(false);
   const [flowers, setFlowers] = useState(saved.flowers || 0);
   const [difficulty, setDifficulty] = useState(saved.difficulty || 0);
+  const [showCredits, setShowCredits] = useState(false);
 
   useEffect(() => {
     if (!gameStarted) return;
@@ -32,6 +34,7 @@ export default function Bloomba() {
     e.preventDefault();
     if (!childName.trim()) return;
     unlockAudio();
+    preloadPhotos();
     setGameStarted(true);
   };
 
@@ -69,7 +72,11 @@ export default function Bloomba() {
               </button>
             </div>
           )}
+          <button type="button" className="credits-link" onClick={() => setShowCredits(true)}>
+            Photo credits
+          </button>
         </form>
+        {showCredits && <Credits onClose={() => setShowCredits(false)} />}
       </div>
     );
   }
@@ -201,7 +208,7 @@ function GameScreen({ childName, flowers, setFlowers, difficulty, setDifficulty,
 const GARDEN_FLOWERS = ['🌸', '🌼', '🌷', '🌻', '🌺', '💐'];
 
 function ChoiceButton({ choice, onPress, wrong, correct, dimmed }) {
-  const className = ['choice', wrong && 'wiggle', correct && 'bounce', dimmed && 'dimmed']
+  const className = ['choice', choice.photo && 'has-photo', wrong && 'wiggle', correct && 'bounce', dimmed && 'dimmed']
     .filter(Boolean)
     .join(' ');
   return (
@@ -211,7 +218,7 @@ function ChoiceButton({ choice, onPress, wrong, correct, dimmed }) {
       onClick={onPress}
       aria-label={choice.label}
     >
-      <span className="choice-emoji">{choice.emoji}</span>
+      <Picture item={choice} />
       <span className="choice-label">{choice.label}</span>
     </button>
   );

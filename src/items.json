@@ -5,42 +5,48 @@
       "emoji": "🔴",
       "label": "Red",
       "color": "#FF6B6B",
-      "spoken": "red"
+      "spoken": "red",
+      "kind": "color"
     },
     {
       "id": "blue",
       "emoji": "🔵",
       "label": "Blue",
       "color": "#4D96FF",
-      "spoken": "blue"
+      "spoken": "blue",
+      "kind": "color"
     },
     {
       "id": "green",
       "emoji": "🟢",
       "label": "Green",
       "color": "#6BCB77",
-      "spoken": "green"
+      "spoken": "green",
+      "kind": "color"
     },
     {
       "id": "yellow",
       "emoji": "🟡",
       "label": "Yellow",
       "color": "#F4C430",
-      "spoken": "yellow"
+      "spoken": "yellow",
+      "kind": "color"
     },
     {
       "id": "purple",
       "emoji": "🟣",
       "label": "Purple",
       "color": "#C67BFF",
-      "spoken": "purple"
+      "spoken": "purple",
+      "kind": "color"
     },
     {
       "id": "orange",
       "emoji": "🟠",
       "label": "Orange",
       "color": "#FF8C42",
-      "spoken": "orange"
+      "spoken": "orange",
+      "kind": "color"
     }
   ],
   "animals": [

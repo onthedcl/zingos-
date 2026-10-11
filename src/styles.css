@@ -315,3 +315,90 @@ button {
     display: none;
   }
 }
+
+/* ---------- Pictures ---------- */
+
+.choice {
+  position: relative;
+  overflow: hidden;
+}
+
+.choice-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Photo tiles: label sits on a soft band across the bottom of the picture. */
+.choice.has-photo .choice-label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 6px 4px 8px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.55));
+}
+
+.choice-shape {
+  width: 60%;
+  height: 60%;
+  fill: #fff;
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.2));
+}
+
+.choice-label {
+  font-size: 20px;
+}
+
+.credits-link {
+  margin-top: 24px;
+  background: none;
+  border: none;
+  color: #fff;
+  text-decoration: underline;
+  font-size: 14px;
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.credits {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 20;
+}
+
+.credits-panel {
+  background: #fff;
+  color: #333;
+  border-radius: 20px;
+  padding: 20px;
+  max-width: 480px;
+  width: 100%;
+  max-height: 85%;
+  overflow-y: auto;
+  text-align: left;
+  user-select: text;
+}
+
+.credits-panel h2 {
+  margin: 0 0 8px;
+}
+
+.credits-panel ul {
+  padding-left: 18px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.credits-panel a {
+  color: #d94f80;
+}
