@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { makeRound, lines, MAX_DIFFICULTY, FLOWERS_PER_LEVEL } from './game.js';
-import { Picture, Credits, preloadPhotos } from './Picture.jsx';
+import { Picture, Credits, hasCredits, preloadPhotos } from './Picture.jsx';
 import { triggerConfetti, playSound, unlockAudio, say, preloadLines, stopSpeaking } from './effects.js';
 
 const STORAGE_KEY = 'bloomba-state';
@@ -72,9 +72,11 @@ export default function Bloomba() {
               </button>
             </div>
           )}
-          <button type="button" className="credits-link" onClick={() => setShowCredits(true)}>
-            Photo credits
-          </button>
+          {hasCredits() && (
+            <button type="button" className="credits-link" onClick={() => setShowCredits(true)}>
+              Photo credits
+            </button>
+          )}
         </form>
         {showCredits && <Credits onClose={() => setShowCredits(false)} />}
       </div>

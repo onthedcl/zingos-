@@ -45,10 +45,15 @@ export function preloadPhotos() {
     });
 }
 
+export const hasCredits = () =>
+  Object.values(CATEGORIES)
+    .flat()
+    .some((item) => item.photo?.artist);
+
 export function Credits({ onClose }) {
   const items = Object.values(CATEGORIES)
     .flat()
-    .filter((item) => item.photo);
+    .filter((item) => item.photo?.artist); // family-supplied photos need no credit
   return (
     <div className="credits" role="dialog" aria-label="Photo credits">
       <div className="credits-panel">

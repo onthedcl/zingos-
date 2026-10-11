@@ -69,7 +69,10 @@
       "emoji": "🐮",
       "label": "Cow",
       "color": "#95E1D3",
-      "spoken": "the Cow"
+      "spoken": "the Cow",
+      "photo": {
+        "file": "cow.webp"
+      }
     },
     {
       "id": "pig",
@@ -83,14 +86,20 @@
       "emoji": "🐸",
       "label": "Frog",
       "color": "#6BCB77",
-      "spoken": "the Frog"
+      "spoken": "the Frog",
+      "photo": {
+        "file": "frog.webp"
+      }
     },
     {
       "id": "lion",
       "emoji": "🦁",
       "label": "Lion",
       "color": "#F4A259",
-      "spoken": "the Lion"
+      "spoken": "the Lion",
+      "photo": {
+        "file": "lion.webp"
+      }
     }
   ],
   "shapes": [
