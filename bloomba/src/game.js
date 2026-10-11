@@ -17,6 +17,10 @@ export const LEVELS = [
 export const MAX_DIFFICULTY = LEVELS.length - 1;
 // Questions per round; difficulty goes up by one level after each finished round.
 export const ROUND_LENGTH = 5;
+// After this many right answers, the next round end is a dance break.
+export const BREAK_AFTER = 40;
+// How long the break lasts before a grown-up can tap "Keep playing".
+export const BREAK_MIN_SECONDS = 60;
 
 function shuffle(list) {
   const copy = [...list];
@@ -64,6 +68,7 @@ export function makeRound(difficulty, previousTarget) {
 export const lines = {
   welcome: { clip: 'welcome', text: PHRASES.welcome },
   roundDone: { clip: 'round-done', text: PHRASES.roundDone },
+  takeBreak: { clip: 'take-break', text: PHRASES.takeBreak },
   find: (item) => ({ clip: `find-${item.id}`, text: `Can you find ${item.spoken}?` }),
   thatsThe: (item) => ({ clip: `thats-${item.id}`, text: `That's ${item.spoken}!` }),
   praise: () => {

@@ -527,3 +527,157 @@ button {
   overflow: hidden;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
 }
+
+/* ---------- Break ---------- */
+
+.break-screen {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px;
+  text-align: center;
+  background: linear-gradient(135deg, #9be7ff 0%, #c67bff 100%);
+}
+
+.break-title {
+  margin: 0;
+  font-size: 40px;
+  color: #fff;
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.12);
+  animation: pop-in 0.4s ease-out;
+}
+
+.break-sub,
+.break-wait {
+  margin: 0;
+  color: #fff;
+  font-size: 20px;
+}
+
+.break-wait {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+.dog-stage {
+  position: relative;
+  width: min(300px, 80vw);
+  aspect-ratio: 200 / 230;
+  max-width: 100%;
+}
+
+.dog {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.dog g {
+  transform-box: fill-box;
+}
+
+.dog-bounce {
+  transform-origin: 50% 100%;
+  animation: dog-bounce 0.55s ease-in-out infinite alternate;
+}
+
+.dog-shadow {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: dog-shadow 0.55s ease-in-out infinite alternate;
+}
+
+.dog-head {
+  transform-origin: 50% 90%;
+  animation: dog-head 1.1s ease-in-out infinite;
+}
+
+.dog-ear.left {
+  transform-origin: 70% 10%;
+  animation: dog-ear 0.55s ease-in-out infinite alternate;
+}
+
+.dog-ear.right {
+  transform-origin: 30% 10%;
+  animation: dog-ear 0.55s ease-in-out infinite alternate-reverse;
+}
+
+.dog-tail {
+  transform-origin: 0% 100%;
+  animation: dog-tail 0.25s ease-in-out infinite alternate;
+}
+
+.dog-paw.left {
+  transform-origin: 50% 0%;
+  animation: dog-paw-left 1.1s ease-in-out infinite;
+}
+
+.dog-paw.right {
+  transform-origin: 50% 0%;
+  animation: dog-paw-right 1.1s ease-in-out infinite;
+}
+
+.dog-eyes {
+  transform-origin: center;
+  animation: dog-blink 3.5s infinite;
+}
+
+.music-note {
+  position: absolute;
+  bottom: 30%;
+  font-size: 30px;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  animation: note-float 4.2s ease-out infinite;
+}
+
+@keyframes dog-bounce {
+  from { transform: translateY(0) scaleY(1); }
+  to { transform: translateY(-18px) scaleY(1.03); }
+}
+
+@keyframes dog-shadow {
+  from { transform: scaleX(1); opacity: 1; }
+  to { transform: scaleX(0.75); opacity: 0.6; }
+}
+
+@keyframes dog-head {
+  0%, 100% { transform: rotate(-10deg); }
+  50% { transform: rotate(10deg); }
+}
+
+@keyframes dog-ear {
+  from { transform: rotate(-12deg); }
+  to { transform: rotate(14deg); }
+}
+
+@keyframes dog-tail {
+  from { transform: rotate(-20deg); }
+  to { transform: rotate(25deg); }
+}
+
+@keyframes dog-paw-left {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(150deg); }
+  50% { transform: rotate(0deg); }
+}
+
+@keyframes dog-paw-right {
+  0%, 50%, 100% { transform: rotate(0deg); }
+  75% { transform: rotate(-150deg); }
+}
+
+@keyframes dog-blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+
+@keyframes note-float {
+  0% { transform: translateY(0) rotate(-10deg); opacity: 0; }
+  15% { opacity: 1; }
+  100% { transform: translateY(-160px) rotate(15deg); opacity: 0; }
+}
