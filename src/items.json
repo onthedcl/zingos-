@@ -182,35 +182,50 @@
       "emoji": "🦋",
       "label": "Butterfly",
       "color": "#FF8C42",
-      "spoken": "the Butterfly"
+      "spoken": "the Butterfly",
+      "photo": {
+        "file": "butterfly.webp"
+      }
     },
     {
       "id": "turtle",
       "emoji": "🐢",
       "label": "Turtle",
       "color": "#4ECDC4",
-      "spoken": "the Turtle"
+      "spoken": "the Turtle",
+      "photo": {
+        "file": "turtle.webp"
+      }
     },
     {
       "id": "bee",
       "emoji": "🐝",
       "label": "Bee",
       "color": "#F4C430",
-      "spoken": "the Bee"
+      "spoken": "the Bee",
+      "photo": {
+        "file": "bee.webp"
+      }
     },
     {
       "id": "ladybug",
       "emoji": "🐞",
       "label": "Ladybug",
       "color": "#FF6B6B",
-      "spoken": "the Ladybug"
+      "spoken": "the Ladybug",
+      "photo": {
+        "file": "ladybug.webp"
+      }
     },
     {
       "id": "snail",
       "emoji": "🐌",
       "label": "Snail",
       "color": "#C67BFF",
-      "spoken": "the Snail"
+      "spoken": "the Snail",
+      "photo": {
+        "file": "snail.webp"
+      }
     }
   ],
   "vehicles": [
